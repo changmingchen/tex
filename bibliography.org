@@ -1,0 +1,1321 @@
+
+
+* bibliography 
+
+[2015-10-07 Wed 09:34]
+
+[2015-10-05 Mon 16:41]
+
+** scheme
+
+|        |                               |         |        |             |       |        |         |
+| scheme |                               | babel   | bibtex | biblatex    | biber | zotelo | chinese |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|      5 | mkdir /tmp/test               |         |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|     10 | embeded bibliography          |         |        |             |       |        |         |
+|     11 | 10 + babel                    | v       |        |             |       |        |         |
+|     12 | 10 + babel + EXPORT_FILE_NAME | v       |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|     20 |                               |         | v      |             |       |        |         |
+| 21.tex | 20 + babel                    | v       | v      |             |       |        |         |
+| 21.bib | 21.bib                        |         |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|     30 |                               |         | v      | v           |       |        |         |
+|     31 | 30 + cat                      | cat EOF | v      | v           |       |        |         |
+|     32 | 30 + cat                      | cat EOF |        | v           | v     |        |         |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|        |                               |         |        | usepackage  |       |        |         |
+|        |                               |         |        | required    |       |        |         |
+|        |                               |         |        | in preamble |       |        |         |
+|        |                               |         |        | see 93      |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|     35 | 30 babel export               | v       |        | v           | v     |        |         |
+|        |                               |         |        |             |       |        |         |
+|--------+-------------------------------+---------+--------+-------------+-------+--------+---------|
+|     40 | 21                            |         |        | v           | v     | v      |         |
+|        |                               |         |        |             |       |        |         |
+|     45 | zotelo export 21.bib          |         |        | v           | v     | v      |         |
+|        |                               |         |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|     50 |                               |         |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+|     90 |                               |         | 92     | 93          | 94    | 95     |      96 |
+|        |                               |         |        |             |       |        |         |
+|        |                               |         |        |             |       |        |         |
+
+
+
+
+
+
+** DONE 45
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/45.tex
+    :END:
+
+# C-c C-e C-s l l
+#   [[../test/45.tex][click here to link to the file ../test/45.tex]]
+# run LaTeX BiBer LaTeX LaTeX to produce pdf
+# [[zotero][click here to install zotero]]
+
+*** steps
+
+| step | goal            | environment | tool                | comment         |
+|------+-----------------+-------------+---------------------+-----------------|
+|   45 |                 |             |                     |                 |
+|      | prepare 21.bib  | in .org     | zotelo              | C-c z c         |
+|      |                 |             |                     |                 |
+|      | link 21.bib     | in .org     | org-reftex-citation |                 |
+|      |                 |             |                     |                 |
+|      | prepare 45.tex  | in .org     | export              | C-c C-e C-s l l |
+|      |                 |             |                     |                 |
+|      | generate pdf    | in .tex     |                     |                 |
+|      |                 |             |                     |                 |
+|------+-----------------+-------------+---------------------+-----------------|
+|    5 | mkdir /tmp/test | in .org     |                     |                 |
+|      |                 |             |                     |                 |
+|   21 | prepare 21.bib  | in .org     | cat EOF             |                 |
+|      |                 |             |                     |                 |
+
+
+
+*** with zotelo:
+
+Every citation must come from bibliography imported by the zotelo. 
+
+Zotelo and reftex work in .tex file.
+
+*** reftex in orgmode
+
+
+org-reftex-citation
+
+C-h f org-reftex-citation RET
+
+org-reftex-citation is an interactive compiled Lisp function in `org.el'.
+
+It is bound to C-c C-x [, <menu-bar> <Org> <LaTeX> <Insert citation>.
+
+(org-reftex-citation)
+
+Use reftex-citation to insert a citation into the buffer.
+This looks for a line like
+
+#+BIB LIOGRAPHY: foo plain option:-d
+
+#+BIBLIOGRAPHY: 21 plain option:-d
+
+and derives from it that foo.bib is the bibliography file relevant for this document.  It then installs the necessary environment for RefTeX to work in this buffer and calls `reftex-citation'  to insert a citation into the buffer.
+
+Export of such citations to both LaTeX and HTML is handled by the contributed package ox-bibtex by Taru Karttunen.
+
+
+
+
+Hello world!! \cite{sher_quantification_2007} \cite{wang_measurement_2012}
+
+| inside .tex                               |   |
+|-------------------------------------------+---|
+| zotelo-minor-mode automatically activated |   |
+| reftex automatically activated            |   |
+|                                           |   |
+
+
+
+| in emacs | zotelo-minor-mode       | reftex-mode (minor mode) |
+|----------+-------------------------+--------------------------|
+| .tex     | automatically activated | automatically activated  |
+|          |                         |                          |
+| .org     | M-x zotelo-minor-mode   | M-x reftex-mode          |
+|          |                         |                          |
+
+*** zotero top 5
+
+
+| top 5 zotero |                        |
+|--------------+------------------------|
+| C-c z c      | zotelo-set-collection  |
+| C-c z u      | zotelo-update-database |
+|              |                        |
+
+*** Bibliography
+
+
+\printbibliography
+
+** DONE 40
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/40.tex
+    :END:
+
+# C-c C-e C-s l l
+#   [[../test/40.tex][click here to link to the file ../test/40.tex]]
+# run LaTeX BiBer LaTeX LaTeX to produce pdf
+# [[zotero][click here to install zotero]]
+
+*** steps
+
+| step | goal            | environment | tool    | comment       |
+|------+-----------------+-------------+---------+---------------|
+|    5 | mkdir /tmp/test |             |         |               |
+|      |                 |             |         |               |
+|      | prepare 21.bib  |             |         |               |
+|      |                 | in orgmode  |         |               |
+|   21 |                 |             | cat EOF | only for test |
+|      |                 |             |         |               |
+|   45 |                 |             | zotelo  |               |
+|      |                 |             |         |               |
+
+my test 
+
+*** with zotelo:
+
+Every citation must come from bibliography imported by the zotelo. 
+
+Zotelo and reftex work in .tex file.
+
+*** reftex in orgmode org-reftex-citation
+
+**** steps
+
+| step |                                    |   |
+|------+------------------------------------+---|
+|      | prepare bib file in directory test |   |
+|      |                                    |   |
+|      | prepare bib link in .org           |   |
+|      |                                    |   |
+|      | search and insert                  |   |
+|      |                                    |   |
+
+**** command
+
+|                   |      |                       |                                |
+| reftex            | .tex | .org                  | comment                        |
+|-------------------+------+-----------------------+--------------------------------|
+|                   |      | org-reftex-citation   |                                |
+| search and insert |      | C-c C-x [             |                                |
+|                   |      |                       |                                |
+| bib               |      | in a line begins with |                                |
+|                   |      | #+BIBLIOGRAPHY:       | I place it in the last subtree |
+|                   |      |                       |                                |
+
+**** manual
+
+
+org-reftex-citation
+
+C-h f org-reftex-citation RET
+
+org-reftex-citation is an interactive compiled Lisp function in `org.el'.
+
+It is bound to C-c C-x [, <menu-bar> <Org> <LaTeX> <Insert citation>.
+
+(org-reftex-citation)
+
+Use reftex-citation to insert a citation into the buffer.
+This looks for a line like
+
+#+BIB LIOGRAPHY: foo plain option:-d
+
+#+BIB LIOGRAPHY: ../test/21
+
+and derives from it that foo.bib is the bibliography file relevant for this document.  It then installs the necessary environment for RefTeX to work in this buffer and calls `reftex-citation'  to insert a citation into the buffer.
+
+Export of such citations to both LaTeX and HTML is handled by the contributed package ox-bibtex by Taru Karttunen.
+
+
+
+
+Hello world!! \cite{sher_quantification_2007}\cite{wang_measurement_2012}
+
+| inside .tex                               |   |
+|-------------------------------------------+---|
+| zotelo-minor-mode automatically activated |   |
+| reftex automatically activated            |   |
+|                                           |   |
+
+
+
+| in emacs | zotelo-minor-mode       | reftex-mode (minor mode) |
+|----------+-------------------------+--------------------------|
+| .tex     | automatically activated | automatically activated  |
+|          |                         |                          |
+| .org     | M-x zotelo-minor-mode   | M-x reftex-mode          |
+|          |                         |                          |
+
+*** zotero top 5
+
+
+| top 5 zotero |                        |
+|--------------+------------------------|
+| C-c z c      | zotelo-set-collection  |
+| C-c z u      | zotelo-update-database |
+|              |                        |
+
+*** printbibliography
+
+
+\printbibliography
+
+** DONE 93 biblatex
+
+*** manual
+
+https://www.ctan.org/pkg/biblatex
+
+http://ftp.yzu.edu.tw/CTAN/macros/latex/contrib/biblatex/doc/biblatex.pdf
+
+
+**** steps
+
+|   |                           | preamble | inside document |
+|---+---------------------------+----------+-----------------|
+|   | load the package biblatex | v        |                 |
+|   |                           |          |                 |
+|   | add the bib file          | v        |                 |
+|   |                           |          |                 |
+|   | print the bibliography    |          | v               |
+|   |                           |          |                 |
+
+**** preamble load by \usepackage
+3.1.1 Load-time Options
+The following options must be used as Biblatex is loaded, i. e., in the optional argument to \usepackage.
+backend=bibtex, bibtex8, bibtexu, biber  default: biber
+
+\usepackage[backend=bibtex]{biblatex}
+
+\usepackage[backend=biber]{biblatex}
+
+\usepackage[]{biblatex}
+
+\usepackage{biblatex}
+
+
+**** preamble add bib file \addbibresource
+
+
+3.1.2 Preamble Options
+
+3.1.2.1 General The following options may be used in the optional argument to \usepackage as well as in the configuration file and the document preamble.
+
+3.6.1 Resources
+
+\addbibresource[hoptionsi]{hresourcei}
+
+Adds a hresourcei, such as a .bib file, to the default resource list. This command is only available in the preamble. It replaces the \bibliography legacy command. Note that files must be specified with their full name, including the extension. Do not omit the .bib extension from the filename. Also note that the hresourcei is a single resource. Invoke \addbibresource multiple times to add more resources, for example:
+
+\addbibresource{bibfile1.bib}
+\addbibresource{bibfile2.bib}
+\addbibresource[location=remote]{http://www.citeulike.org/bibtex/group/951
+\addbibresource[location=remote,label=lan]{ftp://192.168.1.57/~user/file.b
+
+**** print the bibliography
+
+3.6.2 The Bibliography
+
+\printbibliography[hkey=value, ...i]
+
+This command prints the bibliography.
+
+
+*** installation package biblatex
+
+[2015-10-07 Wed 16:59]
+
+
+ tlmgr install latex
+    
+which tlmgr
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr
+
+su
+
+umask 022
+
+/usr/local/texlive/2014/bin/x86_64-linux/tlmgr 
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info biblatex
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install biblatex
+
+
+results in minibuffer
+
+#+HEADERS: :results silent
+
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info biblatex
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     biblatex
+category:    Package
+shortdesc:   Bibliographies in LaTeX using BibTeX for sorting only.
+longdesc:    Biblatex is a complete reimplementation of the bibliographic facilities provided by LaTeX in conjunction with BibTeX. It redesigns the way in which LaTeX interacts with BibTeX at a fairly fundamental level. With biblatex, BibTeX is only used (if it is used at all) to sort the bibliography and to generate labels. Formatting of the bibliography is entirely controlled by TeX macros (the BibTeX-based mechanism embeds some parts of formatting in the BibTeX style file. Good working knowledge in LaTeX should be sufficient to design new bibliography and citation styles; nothing related to BibTeX's language is needed. In fact, users need not remain bound to BibTeX for use with biblatex: an alternative bibliography processor biblatex- biber is available. Development of biblatex and biblatex-biber is closely coupled; the present release of biblatex is designed to work with biblatex-biber version 0.9.6. The package needs e- TeX, and uses the author's etoolbox and logreq packages. For users of biblatex-biber, version 0.9 is required (at least; refer to the notes for the version of biblatex-biber that you are using). Apart from the features unique to biblatex, the package also incorporates core features of the following packages: babelbib, bibtopic, bibunits, chapterbib, cite, inlinebib, mcite and mciteplus, mlbib, multibib, splitbib. Biblatex supports split bibliographies and multiple bibliographies within one document, and separate lists of bibliographic shorthands. Bibliographies may be subdivided into parts (by chapter, by section, etc.) and/or segmented by topics (by type, by keyword, etc.). Biblatex is fully localized and can interface with the babel.
+installed:   No
+sizes:       doc: 18441k, run: 2129k
+relocatable: Yes
+cat-version: 3.0
+cat-date:    2015-04-26 09:52:59 +0200
+cat-license: lppl
+collection:  collection-bibtexextra
+
+
+
+
+
+#+HEADERS: :results raw
+#+HEADERS: :dir /sudo::/tmp
+#+BEGIN_SRC sh
+
+umask 022
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install biblatex
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+[1/1, ??:??/??:??] install: biblatex [168k]
+tlmgr: package log updated: /usr/local/texlive/2015/texmf-var/web2c/tlmgr.log
+running mktexlsr ...
+done running mktexlsr.
+
+
+***  etoolbox.sty
+
+
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info etoolbox
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     etoolbox
+category:    Package
+shortdesc:   e-TeX tools for LaTeX
+longdesc:    The package is a toolbox of programming facilities geared primarily towards LaTeX class and package authors. It provides LaTeX frontends to some of the new primitives provided by e-TeX as well as some generic tools which are not strictly related to e-TeX but match the profile of this package. Note that the initial versions of this package were released under the name elatex. The package provides functions that seem to offer alternative ways of implementing some LaTeX kernel commands; nevertheless, the package will not modify any part of the LaTeX kernel.
+installed:   Yes
+revision:    38031
+sizes:       run: 49k
+relocatable: No
+cat-version: 2.2a
+cat-date:    2015-08-03 06:47:20 +0200
+cat-license: lppl1.3
+cat-topics:  macro-supp
+collection:  collection-latexextra
+
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     etoolbox
+category:    Package
+shortdesc:   e-TeX tools for LaTeX
+longdesc:    The package is a toolbox of programming facilities geared primarily towards LaTeX class and package authors. It provides LaTeX frontends to some of the new primitives provided by e-TeX as well as some generic tools which are not strictly related to e-TeX but match the profile of this package. Note that the initial versions of this package were released under the name elatex. The package provides functions that seem to offer alternative ways of implementing some LaTeX kernel commands; nevertheless, the package will not modify any part of the LaTeX kernel.
+installed:   No
+sizes:       doc: 297k, run: 49k
+relocatable: Yes
+cat-version: 2.2a
+cat-date:    2015-08-03 06:47:20 +0200
+cat-license: lppl1.3
+cat-topics:  macro-supp
+collection:  collection-latexextra
+
+
+
+#+HEADERS: :results raw
+#+HEADERS: :dir /sudo::/tmp
+#+BEGIN_SRC sh
+
+umask 022
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install etoolbox
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+[1/1, ??:??/??:??] install: etoolbox [8k]
+tlmgr: package log updated: /usr/local/texlive/2015/texmf-var/web2c/tlmgr.log
+running mktexlsr ...
+done running mktexlsr.
+
+
+
+
+***  logreq.sty
+
+
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info logreq
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     logreq
+category:    Package
+shortdesc:   Support for automation of the LaTeX workflow.
+longdesc:    The package helps to automate a typical LaTeX workflow that involves running LaTeX several times, running tools such as BibTeX or makeindex, and so on. It will log requests like "please rerun LaTeX" or "please run BibTeX on file X" to an external XML file which lists all open tasks in a machine- readable format. Compiler scripts and integrated LaTeX editing environments may parse this file to determine the next steps in the workflow in a way that is more efficient than parsing the main log file. In sum, the package will do two things: enable package authors to use LaTeX commands to issue requests, collect all requests from all packages and write them to an external XML file at the end of the document.
+installed:   Yes
+revision:    19640
+sizes:       run: 13k
+relocatable: No
+cat-version: 1.0
+cat-date:    2014-10-17 21:54:02 +0200
+cat-license: lppl1.3
+collection:  collection-bibtexextra
+
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     logreq
+category:    Package
+shortdesc:   Support for automation of the LaTeX workflow.
+longdesc:    The package helps to automate a typical LaTeX workflow that involves running LaTeX several times, running tools such as BibTeX or makeindex, and so on. It will log requests like "please rerun LaTeX" or "please run BibTeX on file X" to an external XML file which lists all open tasks in a machine- readable format. Compiler scripts and integrated LaTeX editing environments may parse this file to determine the next steps in the workflow in a way that is more efficient than parsing the main log file. In sum, the package will do two things: enable package authors to use LaTeX commands to issue requests, collect all requests from all packages and write them to an external XML file at the end of the document.
+installed:   No
+sizes:       doc: 49k, run: 13k
+relocatable: Yes
+cat-version: 1.0
+cat-date:    2014-10-17 21:54:02 +0200
+cat-license: lppl1.3
+collection:  collection-bibtexextra
+
+
+#+HEADERS: :results raw
+#+HEADERS: :dir /sudo::/tmp
+#+BEGIN_SRC sh
+
+umask 022
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install logreq
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+[1/1, ??:??/??:??] install: logreq [4k]
+tlmgr: package log updated: /usr/local/texlive/2015/texmf-var/web2c/tlmgr.log
+running mktexlsr ...
+done running mktexlsr.
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+[1/1, ??:??/??:??] install: etoolbox [8k]
+tlmgr: package log updated: /usr/local/texlive/2015/texmf-var/web2c/tlmgr.log
+running mktexlsr ...
+done running mktexlsr.
+
+
+***  url.sty
+
+
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info url
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     url
+category:    Package
+shortdesc:   Verbatim with URL-sensitive line breaks.
+longdesc:    The command \url is a form of verbatim command that allows linebreaks at certain characters or combinations of characters, accepts reconfiguration, and can usually be used in the argument to another command. (The \urldef command provides robust commands that serve in cases when \url doesn't work in an argument.) The command is intended for email addresses, hypertext links, directories/paths, etc., which normally have no spaces, so by default the package ignores spaces in its argument. However, a package option "allows spaces", which is useful for operating systems where spaces are a common part of file names.
+installed:   Yes
+revision:    32528
+sizes:       run: 17k
+relocatable: No
+cat-version: 3.4
+cat-date:    2013-12-31 15:02:54 +0100
+cat-license: lppl
+collection:  collection-latex
+
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     url
+category:    Package
+shortdesc:   Verbatim with URL-sensitive line breaks.
+longdesc:    The command \url is a form of verbatim command that allows linebreaks at certain characters or combinations of characters, accepts reconfiguration, and can usually be used in the argument to another command. (The \urldef command provides robust commands that serve in cases when \url doesn't work in an argument.) The command is intended for email addresses, hypertext links, directories/paths, etc., which normally have no spaces, so by default the package ignores spaces in its argument. However, a package option "allows spaces", which is useful for operating systems where spaces are a common part of file names.
+installed:   No
+sizes:       doc: 277k, run: 17k
+relocatable: Yes
+cat-version: 3.4
+cat-date:    2013-12-31 15:02:54 +0100
+cat-license: lppl
+collection:  collection-latex
+
+
+
+#+HEADERS: :results raw
+#+HEADERS: :dir /sudo::/tmp
+#+BEGIN_SRC sh
+
+umask 022
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install url
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+[1/1, ??:??/??:??] install: url [6k]
+tlmgr: package log updated: /usr/local/texlive/2015/texmf-var/web2c/tlmgr.log
+running mktexlsr ...
+done running mktexlsr.
+
+
+
+** 94 biber UTF-8 encoded
+
+
+https://www.ctan.org/pkg/biber
+
+http://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib/25702#25702
+
+
+
+| program |
+| backend |
+|---------|
+| bibtex  |
+| biber   |
+|         |
+
+| tex | program | bib | generate bibliography |
+|     | bibtex  |     |                       |
+|     | biber   |     |                       |
+
+| packages            | works with bibtex | works with biber |
+| format bibliography |                   |                  |
+|---------------------+-------------------+------------------|
+| natbib              | only              | no               |
+| biblatex            | yes               | yes              |
+|                     |                   |                  |
+
+
+*** installation 
+
+***  url.sty
+
+
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr info biber
+
+#+END_SRC
+
+#+RESULTS:
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     biber
+category:    Package
+shortdesc:   A BibTeX replacement for users of biblatex.
+longdesc:    Biber is a BibTeX replacement for users of biblatex. Biber supports full UTF-8, can (re)-encode input and output, supports highly configurable sorting, dynamic bibliography sets and many other features. The CTAN distribution offers a compressed tar archive of the sources, etc., together with "binary" distributions for a variety of platforms. Note: on SourceForge biber is formally named "biblatex-biber", to distinguish it from an earlier (now apparently moribund) project called "biber".
+installed:   Yes
+revision:    37851
+sizes:       bin: 19301k
+relocatable: No
+cat-version: 2.1
+cat-date:    2015-05-08 00:12:35 +0200
+cat-license: artistic
+cat-topics:  biblio
+cat-related: bibtex crosstex biblatex
+collection:  collection-bibtexextra
+
+Unable to download the remote TeX Live database,
+but found a local copy so using that.
+
+You may want to try specifying an explicit or different CTAN mirror;
+see the information and examples for the -repository option at
+http://tug.org/texlive/doc/install-tl.html
+(or in the output of install-tl --help).
+
+tlmgr: package repository ftp://ftp.ccu.edu.tw/pub/tex/systems/texlive/tlnet
+package:     biber
+category:    Package
+shortdesc:   A BibTeX replacement for users of biblatex.
+longdesc:    Biber is a BibTeX replacement for users of biblatex. Biber supports full UTF-8, can (re)-encode input and output, supports highly configurable sorting, dynamic bibliography sets and many other features. The CTAN distribution offers a compressed tar archive of the sources, etc., together with "binary" distributions for a variety of platforms. Note: on SourceForge biber is formally named "biblatex-biber", to distinguish it from an earlier (now apparently moribund) project called "biber".
+installed:   No
+sizes:       src: 2173k, doc: 337k, bin: 19301k
+relocatable: No
+cat-version: 2.1
+cat-date:    2015-05-08 00:12:35 +0200
+cat-license: artistic
+cat-topics:  biblio
+cat-related: bibtex crosstex biblatex
+collection:  collection-bibtexextra
+
+proxychains -f /home/c5766/.proxychains/proxychains.conf \
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install biber
+
+
+
+#+HEADERS: :results raw
+#+HEADERS: :dir /sudo::/tmp
+#+BEGIN_SRC sh
+
+umask 022
+
+/usr/local/texlive/2015/bin/x86_64-linux/tlmgr install biber
+
+#+END_SRC
+
+
+
+
+
+** 5
+
+#+HEADERS: :results silent
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+rm -f /tmp/test
+
+mkdir /tmp/test 
+
+ls -l /tmp | grep test
+
+pwd
+#+END_SRC
+
+
+
+
+
+** DONE 10
+
+cat the code as /tmp/test/10.tex
+
+
+[[embed%20bibliography][embed bibliography]]
+
+
+\documentclass{article}
+
+\begin{document}
+Hello world!\cite{lamport94}
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+| step |                                     |
+|------+-------------------------------------|
+|      | insert the simple tex template      |
+|      |                                     |
+|      | insert the bibliography environment |
+|      |                                     |
+|      | insert the \cite{cite_key}          |
+|      | (in this example \cite{lamport94})  |
+|      |                                     |
+|      | compile the file.tex with           |
+|      | lualatex file.tex                   |
+|      | lualatex file.tex                   |
+|      | (2 times)                           |
+|      |                                     |
+
+
+
+
+** DONE 11
+
+# pound sign will comment in org and invisible in tex export.
+# export this subtree to a latex buffer, save it, make pdf, and view
+# C-c C-e C-s l L
+# In the export tex file, maketitle and tableofcontents can be adjusted mannually.
+# save the tex buffer and make pdf
+# I comment out \usepackage{} to make it work.
+# I comment out \hypersetup{} to make it work.
+
+
+
+
+Hello world!\cite{lamport94}
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+
+*** org-latex-default-packages-alist and org-latex-packages-alist.
+
+
+| org-latex-default-packages-alist |
+| org-latex-packages-alist         |
+|                                  |
+
+http://orgmode.org/manual/LaTeX-and-PDF-export.html
+
+| C-h v                            |
+| org-latex-default-packages-alist |
+|----------------------------------|
+| default                          |
+|                                  |
+| inputenc                         |
+|                                  |
+| fontenc                          |
+|                                  |
+| fixltx2e                         |
+|                                  |
+| graphicx                         |
+|                                  |
+| longtable                        |
+|                                  |
+| float                            |
+|                                  |
+| wrapfig                          |
+|                                  |
+| rotating                         |
+|                                  |
+| ulem                             |
+|                                  |
+| amsmath                          |
+|                                  |
+| textcomp                         |
+|                                  |
+| marvosym                         |
+|                                  |
+| wasysym                          |
+|                                  |
+| amssymb                          |
+|                                  |
+| hyperref                         |
+|                                  |
+|----------------------------------|
+| I delete them all                |
+|                                  |
+
+Alist of default packages to be inserted in the header. Hide
+   
+   Change this only if one of the packages here causes an
+   incompatibility with another package you are using.
+   
+   The packages in this list are needed by one part or another of
+   Org mode to function properly:
+   
+   - inputenc, fontenc:  for basic font and character selection
+   - fixltx2e: Important patches of LaTeX itself
+   - graphicx: for including images
+   - longtable: For multipage tables
+   - float, wrapfig: for figure placement
+   - rotating: for sideways figures and tables
+   - ulem: for underline and strike-through
+   - amsmath: for subscript and superscript and math environments
+   - textcomp, marvosymb, wasysym, amssymb: for various symbols used
+     for interpreting the entities in `org-entities'.  You can skip
+     some of these packages if you don't use any of their symbols.
+   - hyperref: for cross references
+
+
+
+| C-h v                            |
+| org-latex-default-packages-alist |
+|----------------------------------|
+| default                          |
+|                                  |
+| none                             |
+
+Alist of packages to be inserted in every LaTeX header. Hide
+   
+   These will be inserted after `org-latex-default-packages-alist'.
+   Each element is either a cell or a string.
+
+
+** DONE 12
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/12.tex
+    :END:
+
+# pound sign will comment in org and invisible in tex export.
+# export this subtree to a latex buffer, save it, make pdf, and view
+# C-c C-e C-s l l
+# In the export tex file, maketitle and tableofcontents can be adjusted mannually.
+# The properties EXPORT_FILE_NAME will save the export tex.
+# open the tex and make pdf by click the next line.
+#   [[../test/12.tex][click here to link to the file ../test/12.tex]]
+# run latex latex latex to get pdf
+
+
+Hello world!\cite{lamport94}
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+
+
+** 13 failed 
+    :PROPERTIES:
+    :header-args: latex :file 13.tex
+    :END:
+
+# pound sign will comment in org and invisible in tex export.
+# export this subtree to a latex buffer, save it, make pdf, and view
+# C-c C-e C-s l L
+# In the export tex file, maketitle and tableofcontents can be adjusted mannually.
+
+      :header-args:clojure:    :session *clojure-2*
+
+
+Hello world!\cite{lamport94}
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+
+
+
+** DONE  20
+
+[[bibtex]]
+
+the contents of 20.tex:
+
+\documentclass{article}
+
+\begin{document}
+Hello world!!\cite{greenwade93}
+
+\bibliographystyle{plain}
+\bibliography{20.bib}
+
+\end{document}
+
+the contents of 20.bib
+
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+
+
+http://www.a
+
+BibTeX allows you to store all your references in an external, flat-file database. 
+
+
+| step |                                   |          |
+|------+-----------------------------------+----------|
+|    1 | get inside the specific directory |          |
+|      |                                   | ../test/ |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    2 | edit the  main tex file           |          |
+|      |                                   | 20.tex   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    3 | edit the reference file           |          |
+|      |                                   | 20.bib   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    4 | generate the output               |          |
+|      |                                   | latex    |
+|      |                                   | bibtex   |
+|      |                                   | latex    |
+|      |                                   | latex    |
+|      |                                   | bibtex   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    5 | view the output                   |          |
+
+
+
+
+
+** DONE 21.tex
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/21.tex
+    :END:
+
+# C-c C-e C-s l l
+#   [[../test/21.tex][click here to link to the file ../test/21.tex]]
+# run latex BibTeX latex latex to produce pdf
+
+Hello world!!\cite{greenwade93}
+
+\bibliographystyle{plain}
+\bibliography{21.bib}
+
+
+** DONE 21.bib
+#+HEADERS: :results silent
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+cat << EOF > ../test/21.bib
+
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+
+EOF
+
+
+cat ../test/21.bib
+#+END_SRC
+
+| step |                                   |          |
+|------+-----------------------------------+----------|
+|    1 | get inside the specific directory |          |
+|      |                                   | ../test/ |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    2 | edit the  main tex file           |          |
+|      |                                   | 20.tex   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    3 | edit the reference file           |          |
+|      |                                   | 20.bib   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    4 | generate the output               |          |
+|      |                                   | latex    |
+|      |                                   | bibtex   |
+|      |                                   | latex    |
+|      |                                   | latex    |
+|      |                                   | bibtex   |
+|      |                                   |          |
+|------+-----------------------------------+----------|
+|    5 | view the output                   |          |
+
+
+
+
+** DONE  30
+
+# the contents of 30.tex:
+# run LaTeX BiBTeX LaTeX LaTeX to produce pdf
+
+\documentclass{article}
+
+\usepackage[backend=bibtex]{biblatex}
+
+\bibliography{21.bib}
+
+\begin{document}
+
+Hello world!!\cite{greenwade93}
+
+\printbibliography
+
+\end{document}
+
+
+the contents of 21.bib
+
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+
+
+
+** DONE 35
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/35.tex
+    :END:
+
+# C-c C-e C-s l l
+#   [[../test/35.tex][click here to link to the file ../test/35.tex]]
+# run LaTeX BiBer LaTeX LaTeX to produce pdf
+
+Hello world!!\cite{greenwade93}
+
+\printbibliography
+
+
+
+** DONE 36
+    :PROPERTIES:
+    :EXPORT_FILE_NAME: ../test/36.tex
+    :END:
+
+# C-c C-e C-s l l
+#   [[../test/36.tex][click here to link to the file ../test/36.tex]]
+# run LaTeX BiBer LaTeX LaTeX to produce pdf
+
+Hello world!!\cite{greenwade93}
+
+\printbibliography
+
+
+
+
+
+
+
+** DONE  31
+
+# C-c C-e C-s l L
+#   [[../test/31_cat.tex][click here to link to the file ../test/31_cat.tex]]
+# run LaTeX BiBTeX LaTeX LaTeX to produce pdf
+
+
+#+HEADERS: :results silent
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+cat << EOF > ../test/31_cat.tex
+
+\documentclass{article}
+
+\usepackage[backend=bibtex]{biblatex}
+
+\bibliography{21.bib}
+
+\begin{document}
+
+Hello world!!\cite{greenwade93}
+
+\printbibliography
+
+\end{document}
+
+EOF
+
+
+cat ../test/31_cat.tex
+#+END_SRC
+
+
+
+21.bib
+#+NAME: 21.bib
+#+HEADERS: :results silent
+#+HEADERS: :results raw
+#+BEGIN_SRC sh
+
+cat << EOF > ../test/21.bib
+
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+
+EOF
+
+
+cat ../test/21.bib
+#+END_SRC
+
+
+
+
+** DONE embed bibliography				       :template:bib:
+
+
+\documentclass{article}
+
+\begin{document}
+Hello world!\cite{lamport94}
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+http://www.a
+
+the sequence of the environment, thebibliography, is also the sequence presence in the final output.
+
+
+
+| step |                                     |
+|------+-------------------------------------|
+|      | insert the simple tex template      |
+|      |                                     |
+|      | insert the bibliography environment |
+|      |                                     |
+|      | insert the \cite{cite_key}          |
+|      | (in this example \cite{lamport94})  |
+|      |                                     |
+|      | compile the file.tex with           |
+|      | lualatex file.tex                   |
+|      | lualatex file.tex                   |
+|      | (2 times)                           |
+|      |                                     |
+
+*** the simple tex template
+
+\documentclass{article}
+\begin{document}
+
+Hello world!
+
+\end{document}
+
+*** the bibliography environment
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+
+
+
+
+
+*** the whole
+
+\documentclass{article}
+\begin{document}
+
+Hello world!
+
+\begin{thebibliography}{9}
+
+	\bibitem{lamport94}
+	  Leslie Lamport,
+	  \emph{\LaTeX: A Document Preparation System}.
+	  Addi
+	  2nd Edition,
+	  1994.
+
+\end{thebibliography}
+
+
+\end{document}
+
+** DONE bibtex						       :template:bib:
+
+http://www.andy-roberts.net/writing/latex/bibliographies
+
+
+
+BibTeX allows you to store all your references in an external, flat-file database. 
+
+
+
+*** steps [2014-11-25 Tue 10:54]
+
+
+| step |                                   |
+|------+-----------------------------------|
+|    1 | get inside the specific directory |
+|      |                                   |
+|      |                                   |
+|------+-----------------------------------|
+|    2 | edit the  main tex file           |
+|      |                                   |
+|      |                                   |
+|------+-----------------------------------|
+|    3 | edit the reference file           |
+|      |                                   |
+|      |                                   |
+|------+-----------------------------------|
+|    4 | generate the output               |
+|      |                                   |
+|      |                                   |
+|      |                                   |
+|      |                                   |
+|      |                                   |
+|      |                                   |
+|------+-----------------------------------|
+|    5 | view the output                   |
+|      |                                   |
+
+
+*** the contents of example-1.tex:
+
+\documentclass{article}
+
+\begin{document}
+Hello world!!\cite{greenwade93}
+
+\bibliographystyle{plain}
+\bibliography{
+
+\end{document}
+
+
+*** the contents of sample.bib
+
+@article{greenwade93,
+    author  = "George D. Greenwade",
+    title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork ({CTAN})",
+    year    = "1993",
+    journal = "TUGBoat",
+    volume  = "14",
+    number  = "3",
+    pages   = "342--351"
+}
+
